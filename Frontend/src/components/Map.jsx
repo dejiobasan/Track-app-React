@@ -1,27 +1,32 @@
-import {APIProvider, Map, MapCameraChangedEvent} from '@vis.gl/react-google-maps';
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import axios from "axios";
+import { useState } from "react";
 
 function ViewMap() {
-    return(
-      axios.get("http://localhost:3000/Data")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
+  const [Data, setData] = useState([]);
 
-        <div>
-          <>
-            <h1 className="header">Map Displaying Location</h1>
-            <APIProvider apiKey={'Your API key here'} onLoad={() => console.log('Maps API has loaded.')}>
-              <Map
-                defaultZoom={20}
-                defaultCenter={{ lat: data.lat, lng: data.lng }}
-                onCameraChanged={(ev: MapCameraChangedEvent) => console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)}>
-              </Map>
-            </APIProvider>
-          </>
-        </div>
-    );
-};
+  axios
+    .get("http://localhost:3000/Data")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setData(data);
+    });
+  return (
+    <>
+      <h1 className="header">Map Displaying Location</h1>
+      <APIProvider
+        apiKey={"Your API key here"}
+        onLoad={() => console.log("Maps API has loaded.")}
+      >
+        <Map
+          defaultZoom={20}
+          defaultCenter={{ lat: Data.lat, lng: Data.lng }}
+        >
+        </Map>
+      </APIProvider>
+    </>
+  );
+}
 
 export default ViewMap;
