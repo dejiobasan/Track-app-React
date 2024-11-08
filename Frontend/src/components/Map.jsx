@@ -4,6 +4,7 @@ import { useState } from "react";
 
 function ViewMap() {
   const [Data, setData] = useState([]);
+  const ApiKey = process.env.REACT_APP_MAP_API_KEY;
 
   axios
     .get("http://localhost:3000/Data")
@@ -16,7 +17,7 @@ function ViewMap() {
     <>
       <h1 className="header">Map Displaying Location</h1>
       <APIProvider
-        apiKey={"Your API key here"}
+        apiKey= { ApiKey }
         onLoad={() => console.log("Maps API has loaded.")}
       >
         <Map
