@@ -1,5 +1,5 @@
 
-import "../public/css/styles.css";
+import "./styles.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import ViewMap from "./components/Map";
